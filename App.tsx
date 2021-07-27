@@ -6,14 +6,12 @@ import React from 'react';
  * #################################
  */
 import {NavigationContainer} from '@react-navigation/native';
-import {
-  createStackNavigator,
-  StackNavigationProp,
-} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
   DrawerItemList,
+  DrawerNavigationProp,
 } from '@react-navigation/drawer';
 /**
  * ##################################
@@ -33,7 +31,12 @@ import Store from './shared/context';
 import {Text, Dimensions, View} from 'react-native';
 import * as theme from './shared/theme';
 import D from './assets/data.json';
-import {AuthStack, FavoritesStack, HomeStack} from './@types/navigation';
+import {
+  AuthStack,
+  Drawer,
+  FavoritesStack,
+  HomeStack,
+} from './@types/navigation';
 
 /**
  * #################################
@@ -77,8 +80,7 @@ const App: React.FC = () => {
       setState({...state, favorites: fav});
     },
   });
-
-  const Drawer = createDrawerNavigator();
+  const Drawer = createDrawerNavigator<Drawer>();
   function CustomDrawerContent(props) {
     return (
       <DrawerContentScrollView style={{paddingTop: 0}}>

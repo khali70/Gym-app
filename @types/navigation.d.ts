@@ -6,11 +6,15 @@ type AuthStack = {
 type authScreenProp = StackNavigationProp<AuthStack, 'SignIn'>;
 type HomeStack = {
   Home: undefined;
-  Details: undefined;
+  Details: {workout: workout};
 };
 type HomeScreenProps = StackNavigationProp<HomeStack, 'Home'>;
 type FavoritesStack = {
   Favorites: undefined;
-  Details: undefined;
+  Details: {workout: workout};
 };
 type FavoritesScreenProp = StackNavigationProp<FavoritesStack, 'Favorites'>;
+type Drawer = {
+  Home: undefined;
+  Favorites: undefined;
+};
