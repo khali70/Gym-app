@@ -19,16 +19,17 @@ import styles, {color} from './styles';
 import {state} from '../../@types/global';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {Drawer} from '../../@types/navigation';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 const Home = () => {
-  type HomeScreenDrawerProps = DrawerNavigationProp<Drawer, 'Home'>;
+  type HomeScreenDrawerProps = DrawerNavigationProp<Drawer, 'HomeStack'>;
   const navigation = useNavigation<HomeScreenDrawerProps>();
   const {theme, data} = React.useContext<state>(Store);
   const [activeChip, setActiveChip] = React.useState<muscle>('All');
   const [workouts, setWorkouts] = React.useState<workout[]>([]);
   // BUG update the data schema and remove this temp state
   const [newData, setNewData] = React.useState<workout[]>([]);
-  const [muscles, addMuscle] = React.useState<muscle[]>([]);
+  const [muscles, addMuscle] = React.useState<muscle[]>(['All']);
 
   React.useEffect(() => {
     StatusBar.setBarStyle('light-content');
@@ -84,6 +85,7 @@ const Home = () => {
           contentContainerStyle={styles.tags}>
           {muscles.map((mName, id) => (
             <Chip
+              TouchableComponent={TouchableWithoutFeedback as any}
               key={id}
               title={mName}
               type={activeChip === mName ? 'solid' : 'outline'}
