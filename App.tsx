@@ -104,7 +104,7 @@ const App: React.FC = () => {
             El-Wesam{' '}
           </Text>
         </View>
-        <DrawerItemList {...props} activeTintColor={state.theme.color.main} />
+        <DrawerItemList {...props} />
       </DrawerContentScrollView>
     );
   }
@@ -114,11 +114,20 @@ const App: React.FC = () => {
         <Drawer.Navigator
           drawerContent={props => <CustomDrawerContent {...props} />}
           screenOptions={{
+            drawerActiveTintColor: theme.color.main,
             unmountOnBlur: true,
             headerShown: false,
           }}>
-          <Drawer.Screen name="Home" component={HomeNavigation} />
-          <Drawer.Screen name="Favorites" component={FavoritesNavigation} />
+          <Drawer.Screen
+            name="HomeStack"
+            options={{title: 'Home'}}
+            component={HomeNavigation}
+          />
+          <Drawer.Screen
+            name="FavoritesStack"
+            options={{title: 'Favorites'}}
+            component={FavoritesNavigation}
+          />
         </Drawer.Navigator>
       </NavigationContainer>
     </Store.Provider>

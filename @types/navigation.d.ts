@@ -17,7 +17,7 @@ type FavoritesStack = {
 };
 type FavoritesScreenProp = StackNavigationProp<FavoritesStack, 'Favorites'>;
 type Drawer = {
-  Home: HomeStack;
-  Favorites: FavoritesStack;
+  HomeStack: undefined;
+  FavoritesStack: undefined;
 };
 type DrawerProp = DrawerNavigationProp<Drawer>;
