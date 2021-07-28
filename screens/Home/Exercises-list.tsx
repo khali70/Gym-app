@@ -60,8 +60,8 @@ const ExercisesList: React.FC<{
             // underlayColor={'transparent'}
           >
             <Icon
-              name={`heart`}
-              solid={favorites.includes(item)}
+              name={!favorites.includes(item) ? `plus-square` : 'minus-square'}
+              solid
               type={'font-awesome-5'}
               size={20}
               containerStyle={{

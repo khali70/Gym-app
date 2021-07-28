@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
 
   muscles: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     marginTop: padding * 2,
   },
 
@@ -42,6 +43,7 @@ const styles = StyleSheet.create({
     lineHeight: fontSize.small + 5,
     paddingVertical: padding - 2,
     paddingHorizontal: padding,
+    margin: 2,
     marginRight: padding - 2,
     backgroundColor: color.secondary,
     borderRadius: 50,
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
     width: 44,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: padding / 2,
+    // marginLeft: padding,
   },
 
   accessoryWrapper: {
@@ -59,6 +61,7 @@ const styles = StyleSheet.create({
     width: 44,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingLeft: padding,
   },
   main: {
     flex: 7,
