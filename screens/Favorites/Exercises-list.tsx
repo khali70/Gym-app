@@ -11,17 +11,19 @@ import {Icon} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import styles, {color, TouchableCardContainer} from './styles';
+import styles, {color} from './styles';
 import Store from '../../shared/context';
+import {FavoritesStack} from '../../@types/navigation';
+import {state} from '../../@types/global';
 
-const ExercisesList = ({}) => {
-  // type FavoritesScreenProp = StackNavigationProp<FavoritesStack, 'Favorites'>;
-  const navigation = useNavigation();
-  const {favorites, updateFav} = React.useContext(Store);
-  const delFavorite = id => {
+const ExercisesList: React.FC = ({}) => {
+  type FavoritesScreenProp = StackNavigationProp<FavoritesStack, 'Favorites'>;
+  const navigation = useNavigation<FavoritesScreenProp>();
+  const {favorites, updateFav} = React.useContext<state>(Store);
+  const delFavorite = (id: number) => {
     updateFav([...favorites.filter(item => item.id != id)]);
   };
-  const RenderItem = ({item, index}) => (
+  const RenderItem = ({item}: {item: workout}) => (
     <TouchableHighlight
       style={styles.container}
       underlayColor={'transparent'}
@@ -44,8 +46,7 @@ const ExercisesList = ({}) => {
         <View style={[styles.accessoryView]}>
           <TouchableOpacity
             style={[styles.accessoryWrapper]}
-            onPress={() => delFavorite(item.id)}
-            underlayColor={'transparent'}>
+            onPress={() => delFavorite(item.id)}>
             <Icon
               name={`trash`}
               type={'font-awesome-5'}
@@ -68,7 +69,7 @@ const ExercisesList = ({}) => {
       <FlatList
         data={favorites}
         renderItem={RenderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
       />
     </View>
   );

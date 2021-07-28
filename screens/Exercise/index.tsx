@@ -1,22 +1,13 @@
+import {RouteProp} from '@react-navigation/native';
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-  StatusBar,
-  Image,
-  ImageBackground,
-} from 'react-native';
+import {Image, ScrollView, StatusBar, View} from 'react-native';
+import {Text} from 'react-native-elements';
 import Swiper from 'react-native-web-swiper';
-import {Card, Button, Icon, Text, Divider} from 'react-native-elements';
-import {useFocusEffect} from '@react-navigation/native';
-import Store from '../../shared/context';
+import {FavoritesStack, HomeStack} from '../../@types/navigation';
 import styles, {padding} from './styles';
-
-const Details = ({route}) => {
-  const {data} = React.useContext(Store);
-  const workout = route.params.workout ?? data.chest[0];
+type DetailsNavigationProps = RouteProp<FavoritesStack | HomeStack, 'Details'>;
+const Details: React.FC<{route: DetailsNavigationProps}> = ({route}) => {
+  const workout = route.params.workout;
   React.useEffect(() => {
     StatusBar.setBackgroundColor('rgba(0,0,0,0)');
     StatusBar.setBarStyle('light-content');
@@ -35,7 +26,7 @@ const Details = ({route}) => {
     </ScrollView>
   );
 };
-const ExerciseInfo = ({workout}) => {
+const ExerciseInfo = ({workout}: {workout: workout}) => {
   let {name} = workout;
   return (
     <View style={styles.section}>
@@ -43,7 +34,7 @@ const ExerciseInfo = ({workout}) => {
     </View>
   );
 };
-const ImgSwiper = ({workout}) => {
+const ImgSwiper = ({workout}: {workout: workout}) => {
   const imgs = workout.images;
   const swiperRef = React.useRef(null);
   return (
@@ -74,7 +65,7 @@ const ImgSwiper = ({workout}) => {
     </Swiper>
   );
 };
-const MusclesWorked = ({workout}) => {
+const MusclesWorked = ({workout}: {workout: workout}) => {
   let {muscles, equipment} = workout;
   return (
     <View style={[styles.section, styles.topBorder]}>
@@ -94,7 +85,7 @@ const MusclesWorked = ({workout}) => {
   );
 };
 
-const Instructions = ({workout}) => {
+const Instructions = ({workout}: {workout: workout}) => {
   let {instructions} = workout;
   return (
     <View style={[styles.section, styles.topBorder]}>
@@ -117,13 +108,4 @@ const Instructions = ({workout}) => {
   );
 };
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     width: Dimensions.get('window').width,
-//     minHeight: Dimensions.get('window').height,
-//   },
-// });
 export default Details;

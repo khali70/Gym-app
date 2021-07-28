@@ -1,5 +1,8 @@
-import 'react-native-gesture-handler';
-import React from 'react';
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+} from '@react-navigation/drawer';
 /**
  * #################################
  * ############ navigation #########
@@ -7,36 +10,33 @@ import React from 'react';
  */
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerNavigationProp,
-} from '@react-navigation/drawer';
-/**
- * ##################################
- * ############## screens ###########
- * ##################################
- */
-import {CreateAccount, SignIn} from './Components/screens';
-import Home from './screens/Home/index';
-import ExerciseDetails from './screens/Exercise';
-import FavoritesWorkouts from './screens/Favorites';
-/**
- * ##################################
- * ######## data & elements #########
- * ##################################
- */
-import Store from './shared/context';
-import {Text, Dimensions, View} from 'react-native';
-import * as theme from './shared/theme';
-import D from './assets/data.json';
+import React from 'react';
+import {Text, View} from 'react-native';
+import 'react-native-gesture-handler';
+import {state} from './@types/global';
 import {
   AuthStack,
   Drawer,
   FavoritesStack,
   HomeStack,
 } from './@types/navigation';
+import D from './assets/data.json';
+/**
+ * ##################################
+ * ############## screens ###########
+ * ##################################
+ */
+import {CreateAccount, SignIn} from './Components/screens';
+import ExerciseDetails from './screens/Exercise';
+import FavoritesWorkouts from './screens/Favorites';
+import Home from './screens/Home/index';
+/**
+ * ##################################
+ * ######## data & elements #########
+ * ##################################
+ */
+import Store from './shared/context';
+import * as theme from './shared/theme';
 
 /**
  * #################################
@@ -72,7 +72,7 @@ const FavoritesNavigation: React.FC = () => {
   );
 };
 const App: React.FC = () => {
-  const [state, setState] = React.useState({
+  const [state, setState] = React.useState<state>({
     data: D,
     theme: theme,
     favorites: [],
@@ -115,16 +115,7 @@ const App: React.FC = () => {
           drawerContent={props => <CustomDrawerContent {...props} />}
           screenOptions={{
             unmountOnBlur: true,
-            headerStyle: {
-              backgroundColor: '#c40707',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-            headerTitle: props => (
-              <Text style={{color: '#fff', fontWeight: 'bold'}}>Menu</Text>
-            ),
+            headerShown: false,
           }}>
           <Drawer.Screen name="Home" component={HomeNavigation} />
           <Drawer.Screen name="Favorites" component={FavoritesNavigation} />

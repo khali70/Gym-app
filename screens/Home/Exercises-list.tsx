@@ -12,22 +12,27 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import Store from '../../shared/context';
 import styles, {color} from './styles';
-const ExercisesList = ({FilterByTag, workouts}) => {
-  // type HomeScreenProps = StackNavigationProp<HomeStack, 'Home'>;
-  const navigation = useNavigation();
-  const {theme, favorites, updateFav} = React.useContext(Store);
-  const addFav = item => {
+import {HomeStack} from '../../@types/navigation';
+import {state} from '../../@types/global';
+const ExercisesList: React.FC<{
+  FilterByTag: (tag: muscle) => void;
+  workouts: workout[];
+}> = ({FilterByTag, workouts}) => {
+  type HomeScreenProps = StackNavigationProp<HomeStack, 'Home'>;
+  const navigation = useNavigation<HomeScreenProps>();
+  const {theme, favorites, updateFav} = React.useContext<state>(Store);
+  const addFav = (item: workout) => {
     if (favorites.includes(item)) {
       updateFav([...favorites.filter(({id}) => id !== item.id)]);
     } else {
       updateFav([...favorites, item]);
     }
   };
-  const RenderItem = ({item, index}) => (
+  const RenderItem = ({item, index}: {item: workout; index: number}) => (
     <TouchableHighlight
       style={styles.container}
       underlayColor={'transparent'}
-      onPress={() => navigation.push('Details', {workout: {...item}})}>
+      onPress={() => navigation.push('Details', {workout: item})}>
       <View style={[styles.wrapper]}>
         <Image source={{uri: item.images[0]}} style={styles.img} />
 
@@ -52,7 +57,8 @@ const ExercisesList = ({FilterByTag, workouts}) => {
           <TouchableOpacity
             style={[styles.accessoryWrapper]}
             onPress={() => addFav(item)}
-            underlayColor={'transparent'}>
+            // underlayColor={'transparent'}
+          >
             <Icon
               name={`heart`}
               solid={favorites.includes(item)}
@@ -76,7 +82,7 @@ const ExercisesList = ({FilterByTag, workouts}) => {
       <FlatList
         data={workouts}
         renderItem={RenderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
       />
     </View>
   );

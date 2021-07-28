@@ -3,10 +3,6 @@ import * as theme from '../../shared/theme';
 export const {padding, color, fontSize, fontFamily} = theme;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-
   wrapper: {
     padding: padding,
     paddingVertical: padding * 2,

@@ -5,10 +5,15 @@ import {Header} from 'react-native-elements';
 import Store from '../../shared/context';
 import ExercisesList from './Exercises-list';
 import styles, {color} from './styles';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
+import {Drawer} from '../../@types/navigation';
+import {state} from '../../@types/global';
 
-const Favorites = () => {
-  const navigation = useNavigation();
-  const {theme, favorites} = React.useContext(Store);
+const Favorites: React.FC = () => {
+  type FavoritesScreenDrawerProps = DrawerNavigationProp<Drawer, 'Favorites'>;
+
+  const navigation = useNavigation<FavoritesScreenDrawerProps>();
+  const {theme} = React.useContext<state>(Store);
 
   React.useEffect(() => {
     StatusBar.setBarStyle('light-content');
@@ -31,7 +36,7 @@ const Favorites = () => {
           onPress: () => navigation.navigate('Home'),
         }}
       />
-      <ExercisesList workouts={favorites} />
+      <ExercisesList />
     </View>
   );
 };
