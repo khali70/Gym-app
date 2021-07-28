@@ -11,7 +11,7 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Animated, Easing, StatusBar, Text, View} from 'react-native';
 import 'react-native-gesture-handler';
 import {state} from './@types/global';
 import {
@@ -72,6 +72,20 @@ const FavoritesNavigation: React.FC = () => {
   );
 };
 const App: React.FC = () => {
+  const [splash, setSplash] = React.useState<boolean>(true);
+  const fadeAnim = React.useRef(new Animated.Value(0)).current;
+  React.useEffect(() => {
+    const duration = 3500;
+    StatusBar.setBackgroundColor(theme.color.main);
+    StatusBar.setBarStyle('light-content');
+    Animated.sequence([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, [fadeAnim]);
   const [state, setState] = React.useState<state>({
     data: D,
     theme: theme,
@@ -108,6 +122,28 @@ const App: React.FC = () => {
       </DrawerContentScrollView>
     );
   }
+  if (splash)
+    return (
+      <View
+        style={{
+          display: 'flex',
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: theme.color.main,
+        }}>
+        <Animated.Image
+          source={require('./assets/arm.png')}
+          style={{
+            width: 150,
+            height: 150,
+            tintColor: '#fff',
+            opacity: fadeAnim,
+          }}
+          onLoadEnd={() => setSplash(false)}
+        />
+      </View>
+    );
   return (
     <Store.Provider value={state}>
       <NavigationContainer>
