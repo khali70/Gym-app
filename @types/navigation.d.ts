@@ -1,4 +1,6 @@
+import {NavigatorScreenParams} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
 type AuthStack = {
   SignIn: undefined;
   SignUp: undefined;
@@ -15,6 +17,7 @@ type FavoritesStack = {
 };
 type FavoritesScreenProp = StackNavigationProp<FavoritesStack, 'Favorites'>;
 type Drawer = {
-  Home: undefined;
-  Favorites: undefined;
+  Home: HomeStack;
+  Favorites: FavoritesStack;
 };
+type DrawerProp = DrawerNavigationProp<Drawer>;
