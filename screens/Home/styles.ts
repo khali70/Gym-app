@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: theme.windowWidth,
-    backgroundColor: '#c40707',
   },
   tags: {
     height: 50,
