@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
   tags: {
     height: 50,
     alignItems: 'center',
-    width: theme.windowWidth,
     backgroundColor: color.main_light,
     display: 'flex',
     flexDirection: 'row',

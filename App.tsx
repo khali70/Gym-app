@@ -87,7 +87,7 @@ const App: React.FC = () => {
     ]).start();
   }, [fadeAnim]);
   const [state, setState] = React.useState<state>({
-    data: D,
+    workouts: D,
     theme: theme,
     favorites: [],
     updateFav: fav => {

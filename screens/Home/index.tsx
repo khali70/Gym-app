@@ -1,59 +1,40 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  Dimensions,
-  StatusBar,
-  FlatList,
-  TouchableHighlight,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {Header, SearchBar, Chip} from 'react-native-elements';
-import Store from '../../shared/context';
-import {ListItem, Avatar, Icon} from 'react-native-elements';
-import ExercisesList from './Exercises-list';
-import styles, {color} from './styles';
-import {state} from '../../@types/global';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {Drawer} from '../../@types/navigation';
+import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {ScrollView, StatusBar, View} from 'react-native';
+import {Chip, Header} from 'react-native-elements';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import {state} from '../../@types/global';
+import {Drawer} from '../../@types/navigation';
+import Store from '../../shared/context';
+import ExercisesList from './Exercises-list';
+import styles from './styles';
 
 const Home = () => {
   type HomeScreenDrawerProps = DrawerNavigationProp<Drawer, 'HomeStack'>;
   const navigation = useNavigation<HomeScreenDrawerProps>();
-  const {theme, data} = React.useContext<state>(Store);
+  const {theme, workouts: data} = React.useContext<state>(Store);
   const [activeChip, setActiveChip] = React.useState<muscle>('All');
-  const [workouts, setWorkouts] = React.useState<workout[]>([]);
-  // BUG update the data schema and remove this temp state
-  const [newData, setNewData] = React.useState<workout[]>([]);
+  const [workouts, setWorkouts] = React.useState<workout[]>(data);
   const [muscles, addMuscle] = React.useState<muscle[]>(['All']);
 
   React.useEffect(() => {
     StatusBar.setBarStyle('light-content');
-    const newDataStructure = [];
-    // FIXME reStructure the data and remove this algorithm
+    // FIXME optimize the code
     const tags = [...muscles];
-    for (const key in data) {
-      for (const i of data[key]) {
-        newDataStructure.push(i);
-        for (const m of i.muscles) {
-          if (!tags.includes(m)) tags.push(m);
-        }
+    for (const i of data) {
+      for (const m of i.muscles) {
+        if (!tags.includes(m)) tags.push(m);
       }
     }
     addMuscle([...tags]);
-    setWorkouts([...newDataStructure]);
-    setNewData([...newDataStructure]);
   }, []);
   const FilterByTag = (tag: muscle) => {
     setActiveChip(tag);
     if (tag === 'All') {
-      setWorkouts(newData);
+      setWorkouts(data);
     } else {
-      const muscleWorkoutArray = newData.filter(({muscles}, idx) =>
+      const muscleWorkoutArray = data.filter(({muscles}, idx) =>
         muscles.includes(tag),
       );
       setWorkouts(muscleWorkoutArray);

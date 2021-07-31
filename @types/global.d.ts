@@ -1,6 +1,6 @@
 import * as theme from '../shared/theme';
 type state = {
-  data: jsonData;
+  workouts: workout[];
   theme: typeof theme;
   favorites: workout[];
   updateFav: (fav: workout[]) => void;
