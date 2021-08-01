@@ -1,18 +1,25 @@
+import {DrawerNavigationProp} from '@react-navigation/drawer';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import React from 'react';
-import {View, Dimensions, StatusBar} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {StatusBar, View} from 'react-native';
 import {Header} from 'react-native-elements';
+import {state} from '../../@types/global';
+import {Drawer} from '../../@types/navigation';
 import Store from '../../shared/context';
 import ExercisesList from './Exercises-list';
-import styles, {color} from './styles';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {Drawer} from '../../@types/navigation';
-import {state} from '../../@types/global';
+import styles from './styles';
 
 const Favorites: React.FC = () => {
-  type FavoritesScreenDrawerProps = DrawerNavigationProp<Drawer, 'Favorites'>;
+  type FavoritesScreenDrawerProps = DrawerNavigationProp<
+    Drawer,
+    'FavoritesStack'
+  >;
 
   const navigation = useNavigation<FavoritesScreenDrawerProps>();
+
+  type HomeScreenDrawerRoute = RouteProp<Drawer, 'FavoritesStack'>;
+  const route = useRoute<HomeScreenDrawerRoute>();
+
   const {theme} = React.useContext<state>(Store);
 
   React.useEffect(() => {
@@ -29,11 +36,11 @@ const Favorites: React.FC = () => {
           iconStyle: {color: '#fff'},
           onPress: () => navigation.toggleDrawer(),
         }}
-        centerComponent={{text: 'MY TITLE', style: {color: '#fff'}}}
+        centerComponent={{text: route.name, style: {color: '#fff'}}}
         rightComponent={{
           icon: 'home',
           color: '#fff',
-          onPress: () => navigation.navigate('Home'),
+          onPress: () => navigation.navigate('HomeStack'),
         }}
       />
       <ExercisesList />
