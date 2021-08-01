@@ -4,6 +4,7 @@ import React from 'react';
 import {ScrollView, StatusBar, View} from 'react-native';
 import {Chip, Header} from 'react-native-elements';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import SplashScreen from 'react-native-splash-screen';
 import {state} from '../../@types/global';
 import {Drawer} from '../../@types/navigation';
 import Store from '../../shared/context';
@@ -28,6 +29,7 @@ const Home = () => {
       tags.push(...i.muscles);
     }
     addMuscle([...new Set(tags)]);
+    SplashScreen.hide();
   }, []);
   const FilterByTag = (tag: muscle) => {
     setActiveChip(tag);
