@@ -4,4 +4,7 @@ type state = {
   theme: typeof theme;
   favorites: workout[];
   updateFav: (fav: workout[]) => void;
+  splash: {
+    hide: () => void;
+  };
 };

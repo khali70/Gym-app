@@ -18,7 +18,7 @@ const Home = () => {
   type HomeScreenDrawerRoute = RouteProp<Drawer, 'HomeStack'>;
   const route = useRoute<HomeScreenDrawerRoute>();
 
-  const {theme, workouts: data} = React.useContext<state>(Store);
+  const {theme, workouts: data, splash} = React.useContext<state>(Store);
   const [activeChip, setActiveChip] = React.useState<muscle>('All');
   const [workouts, setWorkouts] = React.useState<workout[]>(data);
   const [muscles, addMuscle] = React.useState<muscle[]>(['All']);
@@ -29,7 +29,9 @@ const Home = () => {
       tags.push(...i.muscles);
     }
     addMuscle([...new Set(tags)]);
-    SplashScreen.hide();
+    setTimeout(() => {
+      splash.hide();
+    }, 0);
   }, []);
   const FilterByTag = (tag: muscle) => {
     setActiveChip(tag);

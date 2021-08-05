@@ -1,19 +1,6 @@
 import {Dimensions, Platform} from 'react-native';
 import {moderateScale as normalize} from 'react-native-size-matters';
-/* 
-const color = {
-  black: '#1E1611',
-  light_black: '#414141',
-  main: '#687178',
-  main_light: '#D3D6D9',
-  secondary: '#83DE02',
-  secondary_font: '#535B65',
-  white: '#fff',
-  light_grey: '#eaeaea',
-  grey: '#ccc',
-  red: 'red',
-  underlayColor: '#ddd',
-}; */
+
 const color = {
   black: '#1E1611',
   light_black: '#414141',

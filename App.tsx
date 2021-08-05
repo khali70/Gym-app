@@ -12,8 +12,11 @@ import {state} from './@types/global';
 import D from './assets/data.json';
 import Store from './shared/context';
 import * as theme from './shared/theme';
+import Splash from './Splash';
 
 const App: React.FC = () => {
+  const [viewSplash, setSplashState] = React.useState<boolean>(true);
+
   const [state, setState] = React.useState<state>({
     workouts: D,
     theme: theme,
@@ -21,7 +24,13 @@ const App: React.FC = () => {
     updateFav: fav => {
       setState({...state, favorites: fav});
     },
+    splash: {
+      hide: () => {
+        setSplashState(false);
+      },
+    },
   });
+  if (viewSplash) return <Splash setEndAnimation={setSplashState} />;
   return (
     <Store.Provider value={state}>
       <StatusBar backgroundColor={theme.color.main} barStyle="light-content" />

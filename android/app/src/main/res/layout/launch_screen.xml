@@ -6,16 +6,4 @@
     android:orientation="vertical"
     android:scaleX="2"
     android:scaleY="2">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="false"
-        android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"
-        android:background="#d90429"
-        android:scaleType="centerInside"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/launch_screen" />
-
 </RelativeLayout>
