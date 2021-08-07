@@ -1,9 +1,24 @@
-# final work
+## Welcome! 👋
 
-- [ ] add splash screen with set time out
-  - [ ] see [react-native-lottie-splash-screen](https://www.npmjs.com/package/react-native-lottie-splash-screen) for splash screen with animation
+Thanks for checking out my React-Native app
 
-# future work
+**To do this app, I needed a solid understanding of React, CSS and js,TS.**
+
+## previews
+
+![app](./assets/preview.gif)
+
+## project structure
+
+in `shared` you will find `theme`,`React context`
+
+in `routes` you will find `navigators`
+
+in `screens` you will find every screen and its components
+
+in `components` you will find components for future
+
+# future work 🚀
 
 - [ ] chang language to ar
 - [ ] blog on android
